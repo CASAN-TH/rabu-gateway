@@ -81,8 +81,8 @@ services:
     depends_on:
       - db
       - auth
-      - teams
-      - products
-      - orders
+      # - teams
+      # - products
+      # - orders
     deploy:
       replicas: 1
