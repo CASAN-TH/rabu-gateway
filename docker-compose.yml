@@ -20,7 +20,7 @@ services:
       replicas: 1
 
   auth:
-    image: authen-service
+    image: cyberadvance/authen-service
     ports:
       - "3001:3000"
     depends_on:
@@ -33,7 +33,7 @@ services:
       replicas: 1
 
   teams:
-    image: team-service
+    image: cyberadvance/team-service
     ports:
       - "3002:3000"
     depends_on:
@@ -47,7 +47,7 @@ services:
       replicas: 1
 
   products:
-    image: product-service
+    image: cyberadvance/product-service
     ports:
       - "3003:3000"
     depends_on:
@@ -61,7 +61,7 @@ services:
       replicas: 1
 
   orders:
-    image: order-service
+    image: cyberadvance/order-service
     ports:
       - "3004:3000"
     depends_on:
