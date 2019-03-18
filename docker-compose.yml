@@ -60,19 +60,19 @@ services:
     deploy:
       replicas: 1
 
-  # orders:
-  #   image: cyberadvance/order-service
-  #   ports:
-  #     - "3004:3000"
-  #   depends_on:
-  #     - db
-  #     - auth
-  #     - mq
-  #   environment:
-  #     - MONGO_DB_URI=mongodb://db/order
-  #     - AMQP_URL=amqp://mq
-  #   deploy:
-  #     replicas: 1
+  orders:
+    image: cyberadvance/order-service
+    ports:
+      - "3004:3000"
+    depends_on:
+      - db
+      - auth
+      - mq
+    environment:
+      - MONGO_DB_URI=mongodb://db/order
+      - AMQP_URL=amqp://mq
+    deploy:
+      replicas: 1
 
   web:
     image: cyberadvance/rabu-gateway
