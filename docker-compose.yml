@@ -52,7 +52,7 @@ services:
       - "3003:3000"
     depends_on:
       - db
-      # - auth
+      - auth
       - mq
     environment:
       - MONGO_DB_URI=mongodb://db/product
