@@ -1,64 +1,64 @@
 version: '3'
 services:
-  db:
-    image: mongo
-    ports:
-      - "27017:27017"
-    deploy:
-      replicas: 1
-
-  mq:
-    image: rabbitmq:3-management
-    hostname: my-rabbit
-    ports:
-      - "15672:15672"
-      - "5672:5672"
-      - "25676:25676"
-    labels:
-      NAME: rabbit13
-    deploy:
-      replicas: 1
-
-  auth:
-    image: cyberadvance/authen-service
-    ports:
-      - "3001:3000"
-    depends_on:
-      - db
-      - mq
-    environment:
-      - MONGO_DB_URI=mongodb://db/auth
-      - AMQP_URL=amqp://mq
-    deploy:
-      replicas: 1
-
-  teams:
-    image: cyberadvance/team-service
-    ports:
-      - "3002:3000"
-    depends_on:
-      - db
-      - auth
-      - mq
-    environment:
-      - MONGO_DB_URI=mongodb://db/team
-      - AMQP_URL=amqp://mq
-    deploy:
-      replicas: 1
-
-  # products:
-  #   image: cyberadvance/product-service
+  # db:
+  #   image: mongo
   #   ports:
-  #     - "3003:3000"
+  #     - "27017:27017"
+  #   deploy:
+  #     replicas: 1
+
+  # mq:
+  #   image: rabbitmq:3-management
+  #   hostname: my-rabbit
+  #   ports:
+  #     - "15672:15672"
+  #     - "5672:5672"
+  #     - "25676:25676"
+  #   labels:
+  #     NAME: rabbit13
+  #   deploy:
+  #     replicas: 1
+
+  # auth:
+  #   image: cyberadvance/authen-service
+  #   ports:
+  #     - "3001:3000"
   #   depends_on:
   #     - db
-  #     # - auth
   #     - mq
   #   environment:
-  #     - MONGO_DB_URI=mongodb://db/product
+  #     - MONGO_DB_URI=mongodb://db/auth
   #     - AMQP_URL=amqp://mq
   #   deploy:
   #     replicas: 1
+
+  # teams:
+  #   image: cyberadvance/team-service
+  #   ports:
+  #     - "3002:3000"
+  #   depends_on:
+  #     - db
+  #     - auth
+  #     - mq
+  #   environment:
+  #     - MONGO_DB_URI=mongodb://db/team
+  #     - AMQP_URL=amqp://mq
+  #   deploy:
+  #     replicas: 1
+
+  products:
+    image: cyberadvance/product-service
+    ports:
+      - "3003:3000"
+    depends_on:
+      - db
+      # - auth
+      - mq
+    environment:
+      - MONGO_DB_URI=mongodb://db/product
+      - AMQP_URL=amqp://mq
+    deploy:
+      replicas: 1
 
   # orders:
   #   image: cyberadvance/order-service
