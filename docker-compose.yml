@@ -32,61 +32,61 @@ services:
     deploy:
       replicas: 1
 
-  teams:
-    image: cyberadvance/team-service
-    ports:
-      - "3002:3000"
-    depends_on:
-      - db
-      - auth
-      - mq
-    environment:
-      - MONGO_DB_URI=mongodb://db/team
-      - AMQP_URL=amqp://mq
-    deploy:
-      replicas: 1
+  # teams:
+  #   image: cyberadvance/team-service
+  #   ports:
+  #     - "3002:3000"
+  #   depends_on:
+  #     - db
+  #     - auth
+  #     - mq
+  #   environment:
+  #     - MONGO_DB_URI=mongodb://db/team
+  #     - AMQP_URL=amqp://mq
+  #   deploy:
+  #     replicas: 1
 
-  products:
-    image: cyberadvance/product-service
-    ports:
-      - "3003:3000"
-    depends_on:
-      - db
-      - auth
-      - mq
-    environment:
-      - MONGO_DB_URI=mongodb://db/product
-      - AMQP_URL=amqp://mq
-    deploy:
-      replicas: 1
+  # products:
+  #   image: cyberadvance/product-service
+  #   ports:
+  #     - "3003:3000"
+  #   depends_on:
+  #     - db
+  #     # - auth
+  #     - mq
+  #   environment:
+  #     - MONGO_DB_URI=mongodb://db/product
+  #     - AMQP_URL=amqp://mq
+  #   deploy:
+  #     replicas: 1
 
-  orders:
-    image: cyberadvance/order-service
-    ports:
-      - "3004:3000"
-    depends_on:
-      - db
-      - auth
-      - mq
-    environment:
-      - MONGO_DB_URI=mongodb://db/order
-      - AMQP_URL=amqp://mq
-    deploy:
-      replicas: 1
+  # orders:
+  #   image: cyberadvance/order-service
+  #   ports:
+  #     - "3004:3000"
+  #   depends_on:
+  #     - db
+  #     - auth
+  #     - mq
+  #   environment:
+  #     - MONGO_DB_URI=mongodb://db/order
+  #     - AMQP_URL=amqp://mq
+  #   deploy:
+  #     replicas: 1
 
-  customers:
-    image: cyberadvance/customer-service
-    ports:
-      - "3005:3000"
-    depends_on:
-      - db
-      - auth
-      - mq
-    environment:
-      - MONGO_DB_URI=mongodb://db/customer
-      - AMQP_URL=amqp://mq
-    deploy:
-      replicas: 1
+  # customers:
+  #   image: cyberadvance/customer-service
+  #   ports:
+  #     - "3005:3000"
+  #   depends_on:
+  #     - db
+  #     - auth
+  #     - mq
+  #   environment:
+  #     - MONGO_DB_URI=mongodb://db/customer
+  #     - AMQP_URL=amqp://mq
+  #   deploy:
+  #     replicas: 1
 
   web:
     image: cyberadvance/rabu-gateway
@@ -94,10 +94,7 @@ services:
       - "80:80"
     depends_on:
       - db
-      - auth
-      - teams
-      - products
-      - orders
-      - customers
+      # - auth
+      - mq
     deploy:
       replicas: 1
