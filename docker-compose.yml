@@ -74,33 +74,33 @@ services:
   #   deploy:
   #     replicas: 1
 
-  customers:
-    image: cyberadvance/customer-service
-    ports:
-      - "3005:3000"
-    depends_on:
-      - db
-      - auth
-      - mq
-    environment:
-      - MONGO_DB_URI=mongodb://db/customer
-      - AMQP_URL=amqp://mq
-    deploy:
-      replicas: 1
-
-  # monitors:
-  #   image: cyberadvance/monitor-service
+  # customers:
+  #   image: cyberadvance/customer-service
   #   ports:
-  #     - "3006:3000"
+  #     - "3005:3000"
   #   depends_on:
   #     - db
   #     - auth
   #     - mq
   #   environment:
-  #     - MONGO_DB_URI=mongodb://db/monitor
+  #     - MONGO_DB_URI=mongodb://db/customer
   #     - AMQP_URL=amqp://mq
   #   deploy:
   #     replicas: 1
+
+  monitors:
+    image: cyberadvance/monitor-service
+    ports:
+      - "3006:3000"
+    depends_on:
+      - db
+      - auth
+      - mq
+    environment:
+      - MONGO_DB_URI=mongodb://db/monitor
+      - AMQP_URL=amqp://mq
+    deploy:
+      replicas: 1
 
   web:
     image: cyberadvance/rabu-gateway
