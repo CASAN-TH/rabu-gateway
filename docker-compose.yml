@@ -32,19 +32,19 @@ services:
     deploy:
       replicas: 1
 
-  # teams:
-  #   image: cyberadvance/team-service
-  #   ports:
-  #     - "3002:3000"
-  #   depends_on:
-  #     - db
-  #     - auth
-  #     - mq
-  #   environment:
-  #     - MONGO_DB_URI=mongodb://db/team
-  #     - AMQP_URL=amqp://mq
-  #   deploy:
-  #     replicas: 1
+  teams:
+    image: cyberadvance/team-service
+    ports:
+      - "3002:3000"
+    depends_on:
+      - db
+      - auth
+      - mq
+    environment:
+      - MONGO_DB_URI=mongodb://db/team
+      - AMQP_URL=amqp://mq
+    deploy:
+      replicas: 1
 
   # products:
   #   image: cyberadvance/product-service
