@@ -95,5 +95,9 @@ services:
     depends_on:
       - db
       - auth
+      - teams
+      - products
+      - orders
+      - customers
     deploy:
       replicas: 1
