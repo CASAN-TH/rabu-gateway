@@ -88,6 +88,20 @@ services:
     deploy:
       replicas: 1
 
+  # monitors:
+  #   image: cyberadvance/monitor-service
+  #   ports:
+  #     - "3006:3000"
+  #   depends_on:
+  #     - db
+  #     - auth
+  #     - mq
+  #   environment:
+  #     - MONGO_DB_URI=mongodb://db/monitor
+  #     - AMQP_URL=amqp://mq
+  #   deploy:
+  #     replicas: 1
+
   web:
     image: cyberadvance/rabu-gateway
     ports: 
