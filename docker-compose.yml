@@ -102,13 +102,13 @@ services:
     deploy:
       replicas: 1
 
-  web:
-    image: cyberadvance/rabu-gateway
-    ports: 
-      - "80:80"
-    depends_on:
-      - db
-      # - auth
-      - mq
-    deploy:
-      replicas: 1
+  # web:
+  #   image: cyberadvance/rabu-gateway
+  #   ports: 
+  #     - "80:80"
+  #   depends_on:
+  #     - db
+  #     # - auth
+  #     - mq
+  #   deploy:
+  #     replicas: 1
