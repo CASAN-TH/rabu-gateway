@@ -1,114 +1,107 @@
 version: '3'
 services:
-  # db:
-  #   image: mongo
-  #   ports:
-  #     - "27017:27017"
-  #   deploy:
-  #     replicas: 1
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    deploy:
+      replicas: 1
 
-  # mq:
-  #   image: rabbitmq:3-management
-  #   hostname: my-rabbit
-  #   ports:
-  #     - "15672:15672"
-  #     - "5672:5672"
-  #     - "25676:25676"
-  #   labels:
-  #     NAME: rabbit13
-  #   deploy:
-  #     replicas: 1
+  mq:
+    image: rabbitmq:3-management
+    hostname: my-rabbit
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "25676:25676"
+    labels:
+      NAME: rabbit13
+    deploy:
+      replicas: 1
 
-  # auth:
-  #   image: cyberadvance/authen-service
-  #   ports:
-  #     - "3001:3000"
-  #   depends_on:
-  #     - db
-  #     - mq
-  #   environment:
-  #     - MONGO_DB_URI=mongodb://db/auth
-  #     - AMQP_URL=amqp://mq
-  #   deploy:
-  #     replicas: 1
+  auth:
+    image: cyberadvance/authen-service
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
+      - mq
+    environment:
+      - MONGO_DB_URI=mongodb://db/auth
+      - AMQP_URL=amqp://mq
+    deploy:
+      replicas: 1
 
-  # teams:
-  #   image: cyberadvance/team-service
-  #   ports:
-  #     - "3002:3000"
-  #   depends_on:
-  #     - db
-  #     - auth
-  #     - mq
-  #   environment:
-  #     - MONGO_DB_URI=mongodb://db/team
-  #     - AMQP_URL=amqp://mq
-  #   deploy:
-  #     replicas: 1
+  teams:
+    image: cyberadvance/team-service
+    ports:
+      - "3002:3000"
+    depends_on:
+      - auth
+    environment:
+      - MONGO_DB_URI=mongodb://db/team
+      - AMQP_URL=amqp://mq
+    deploy:
+      replicas: 1
 
-  # products:
-  #   image: cyberadvance/product-service
-  #   ports:
-  #     - "3003:3000"
-  #   depends_on:
-  #     - db
-  #     - auth
-  #     - mq
-  #   environment:
-  #     - MONGO_DB_URI=mongodb://db/product
-  #     - AMQP_URL=amqp://mq
-  #   deploy:
-  #     replicas: 1
+  products:
+    image: cyberadvance/product-service
+    ports:
+      - "3003:3000"
+    depends_on:
+      - auth
+    environment:
+      - MONGO_DB_URI=mongodb://db/product
+      - AMQP_URL=amqp://mq
+    deploy:
+      replicas: 1
 
-  # orders:
-  #   image: cyberadvance/order-service
-  #   ports:
-  #     - "3004:3000"
-  #   depends_on:
-  #     - db
-  #     - auth
-  #     - mq
-  #   environment:
-  #     - MONGO_DB_URI=mongodb://db/order
-  #     - AMQP_URL=amqp://mq
-  #   deploy:
-  #     replicas: 1
+  orders:
+    image: cyberadvance/order-service
+    ports:
+      - "3004:3000"
+    depends_on:
+      - auth
+    environment:
+      - MONGO_DB_URI=mongodb://db/order
+      - AMQP_URL=amqp://mq
+    deploy:
+      replicas: 1
 
-  # customers:
-  #   image: cyberadvance/customer-service
-  #   ports:
-  #     - "3005:3000"
-  #   depends_on:
-  #     - db
-  #     - auth
-  #     - mq
-  #   environment:
-  #     - MONGO_DB_URI=mongodb://db/customer
-  #     - AMQP_URL=amqp://mq
-  #   deploy:
-  #     replicas: 1
+  customers:
+    image: cyberadvance/customer-service
+    ports:
+      - "3005:3000"
+    depends_on:
+      - auth
+    environment:
+      - MONGO_DB_URI=mongodb://db/customer
+      - AMQP_URL=amqp://mq
+    deploy:
+      replicas: 1
 
   monitors:
     image: cyberadvance/monitor-service
     ports:
       - "3006:3000"
     depends_on:
-      - db
       - auth
-      - mq
     environment:
       - MONGO_DB_URI=mongodb://db/monitor
       - AMQP_URL=amqp://mq
     deploy:
       replicas: 1
 
-  # web:
-  #   image: cyberadvance/rabu-gateway
-  #   ports: 
-  #     - "80:80"
-  #   depends_on:
-  #     - db
-  #     # - auth
-  #     - mq
-  #   deploy:
-  #     replicas: 1
+  web:
+    image: cyberadvance/rabu-gateway
+    ports: 
+      - "80:80"
+    depends_on:
+      - auth
+      - teams
+      - products
+      - orders
+      - customers
+      - monitors
+    deploy:
+      replicas: 1
