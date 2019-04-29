@@ -6,7 +6,8 @@ services:
       - "3001:3000"
     environment:
       - MONGO_DB_URI=mongodb://54.255.235.162/rabu-test-db
-      - AMQP_URL=amqp://xeyvpanu:ZUkVpxBMXr1Dm2cQOQZyKumESIPohGyJ@vulture.rmq.cloudamqp.com/xeyvpanu
+      - AMQP_URL=amqp://18.136.211.19
+      # - AMQP_URL=amqp://xeyvpanu:ZUkVpxBMXr1Dm2cQOQZyKumESIPohGyJ@vulture.rmq.cloudamqp.com/xeyvpanu
     deploy:
       replicas: 1
 
@@ -18,7 +19,7 @@ services:
       - auth
     environment:
       - MONGO_DB_URI=mongodb://54.255.235.162/rabu-test-db
-      - AMQP_URL=amqp://xeyvpanu:ZUkVpxBMXr1Dm2cQOQZyKumESIPohGyJ@vulture.rmq.cloudamqp.com/xeyvpanu
+      - AMQP_URL=amqp://18.136.211.19
     deploy:
       replicas: 1
 
@@ -30,7 +31,7 @@ services:
       - auth
     environment:
       - MONGO_DB_URI=mongodb://54.255.235.162/rabu-test-db
-      - AMQP_URL=amqp://xeyvpanu:ZUkVpxBMXr1Dm2cQOQZyKumESIPohGyJ@vulture.rmq.cloudamqp.com/xeyvpanu
+      - AMQP_URL=amqp://18.136.211.19
     deploy:
       replicas: 1
 
@@ -42,7 +43,7 @@ services:
       - auth
     environment:
       - MONGO_DB_URI=mongodb://54.255.235.162/rabu-test-db
-      - AMQP_URL=amqp://xeyvpanu:ZUkVpxBMXr1Dm2cQOQZyKumESIPohGyJ@vulture.rmq.cloudamqp.com/xeyvpanu
+      - AMQP_URL=amqp://18.136.211.19
     deploy:
       replicas: 1
 
@@ -54,7 +55,7 @@ services:
       - auth
     environment:
       - MONGO_DB_URI=mongodb://54.255.235.162/rabu-test-db
-      - AMQP_URL=amqp://xeyvpanu:ZUkVpxBMXr1Dm2cQOQZyKumESIPohGyJ@vulture.rmq.cloudamqp.com/xeyvpanu
+      - AMQP_URL=amqp://18.136.211.19
     deploy:
       replicas: 1
 
@@ -66,6 +67,6 @@ services:
       - auth
     environment:
       - MONGO_DB_URI=mongodb://54.255.235.162/rabu-test-db
-      - AMQP_URL=amqp://xeyvpanu:ZUkVpxBMXr1Dm2cQOQZyKumESIPohGyJ@vulture.rmq.cloudamqp.com/xeyvpanu
+      - AMQP_URL=amqp://18.136.211.19
     deploy:
       replicas: 1
